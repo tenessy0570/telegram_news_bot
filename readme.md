@@ -1,5 +1,12 @@
+1. [Installation](#installation)
+    + [Using docker](#using-docker)
+    + [Without docker](#without-docker)
+2. [About bot](#about-bot)
+    + [Commands](#commands)
+3. [Database schema](#database-schema)
 # Installation
 ## Using docker
+
 ```shell
 cd tg_bot
 git clone https://github.com/tenessy0570/telegram_news_bot.git
@@ -64,3 +71,4 @@ chose. SQLite is being used here as a database.
 ```
 
 ## Database schema
+[click](https://github.com/tenessy0570/telegram_news_bot/blob/main/schema.pdf)
