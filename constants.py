@@ -1,7 +1,8 @@
 BOT_DESCRIPTION = \
-    "Hello! I am news bot. Using me you can get news with one command!\n" \
+    "I am news bot. Using me you can get news with one command!\n" \
     "Available commands:\n" \
-    "/start -> Get bot description\n" \
-    "/update_n <value> -> Change your N value (The number of news headers you want to receive)\n" \
-    "/from_source -> Get news sources list to choose one\n" \
-    "/get_news -> Get N amount of news headers from source you chose\n"
+    "/help -> get all commands description. same can be done with /help\n" \
+    "/update_n <value> -> set your N value (amount of news headers you will receive)\n" \
+    "/get_sources -> get list of all sources. You can choose only one of them!\n" \
+    "/set_source -> set source to get news from\n" \
+    "/get_news -> get N amout of news headers"

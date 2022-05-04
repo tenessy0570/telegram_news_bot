@@ -36,17 +36,20 @@ async def start(event: types.Message):
     await send_start_message(event)
 
 
+@dp.message_handler(commands=['help'])
+async def provide_help(event: types.message):
+    await send_start_message(event)
+
+
 @dp.message_handler(commands=['update_n'])
 async def update_n(event: types.Message):
+    n_value = event.get_args()
+
+    if not n_value:
+        await event.answer("Type number to set value.")
+        return None
 
     async with async_session() as session:
-
-        try:
-            n_value = event.get_args()
-        except exceptions.MessageTextIsEmpty:
-            await event.answer("Type number to set value.")
-            return None
-
         await change_n_value(session, event, n_value)
 
 
@@ -80,7 +83,7 @@ async def set_source(event: types.Message):
         source = await get_source_by_name(session, source_name)
 
         if not source:
-            await event.answer('This source doesn\'t exist.')
+            await event.answer('Type name of source after /set_source command to set your preferrable news source')
             return None
 
         await set_user_source(event, session, source)
