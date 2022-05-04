@@ -1,4 +1,5 @@
 import json
+from actions_logging import logging
 
 import constants
 from db import actions
@@ -34,6 +35,10 @@ async def change_n_value(session, event, n_value):
     )
 
     await event.answer(f"N value has been changed from {n_value_before_changing} to {n_value}")
+    await logging.log_action(
+        action_type=f'change N value from {n_value_before_changing} to {n_value}',
+        user_id=current_user.id
+    )
 
 
 def get_decoded_json(json_body) -> dict:

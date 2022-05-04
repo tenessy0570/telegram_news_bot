@@ -75,3 +75,13 @@ class NewsSourceAction:
             return q.fetchone()[0]
         except TypeError:
             return None
+
+
+class ActionDoings:
+    def __init__(self, db_session: Session):
+        self.db_session = db_session
+
+    async def create_action(self, action_type: str, user_id: int, used_news_source: int = None):
+        new_action = Action(action_type=action_type, user_id=user_id, used_news_source=used_news_source)
+        self.db_session.add(new_action)
+        await self.db_session.commit()

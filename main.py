@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types, executor
-from aiogram.utils import exceptions
 from os import getenv
 
+from actions_logging import logging
 from db.config import async_session
 from utils import (
     change_n_value,
@@ -25,6 +25,7 @@ dp = Dispatcher(bot=bot)
 
 @dp.message_handler(commands=['start'])
 async def start(event: types.Message):
+
     await event.answer("Hello, " + event.from_user.full_name + "!")
 
     async with async_session() as session:
@@ -34,11 +35,14 @@ async def start(event: types.Message):
             await add_new_user(session, event)
 
     await send_start_message(event)
+    await logging.log_action(action_type='command /start', event=event)
 
 
 @dp.message_handler(commands=['help'])
 async def provide_help(event: types.message):
     await send_start_message(event)
+    await logging.log_action(action_type='/help', event=event)
+
 
 
 @dp.message_handler(commands=['update_n'])
@@ -64,6 +68,11 @@ async def get_news(event: types.Message):
         return None
 
     await send_news(current_user, user_source, event)
+    await logging.log_action(
+        action_type='get news',
+        user_id=current_user.id,
+        used_news_source=user_source.name
+    )
 
 
 @dp.message_handler(commands=['get_sources'])
@@ -73,6 +82,7 @@ async def get_sources(event: types.Message):
 
     prettified_sources = get_prettified_sources(sources)
     await event.answer(prettified_sources)
+    await logging.log_action(action_type='get sources list', event=event)
 
 
 @dp.message_handler(commands=['set_source'])
@@ -87,6 +97,11 @@ async def set_source(event: types.Message):
             return None
 
         await set_user_source(event, session, source)
+        await logging.log_action(
+            action_type='set source',
+            event=event,
+            used_news_source=source.name
+        )
 
 
 if __name__ == '__main__':
