@@ -47,3 +47,31 @@ class UserAction:
         q.execution_options(synchronize_session="fetch")
         await self.db_session.execute(q)
         await self.db_session.commit()
+
+
+class NewsSourceAction:
+    def __init__(self, db_session: Session):
+        self.db_session = db_session
+
+    async def create_source(self, name: str, link: str):
+        new_source = NewsSource(name=name, link=link)
+        self.db_session.add(new_source)
+        await self.db_session.commit()
+
+    async def get_all_sources(self) -> List[NewsSource]:
+        q = await self.db_session.execute(select(NewsSource).order_by(NewsSource.id))
+        return q.scalars().all()
+
+    async def get_source_by_id(self, source_id: int):
+        q = await self.db_session.execute(select(NewsSource).where(NewsSource.id == source_id))
+        try:
+            return q.fetchone()[0]
+        except TypeError:
+            return None
+
+    async def get_source_by_name(self, name: str):
+        q = await self.db_session.execute(select(NewsSource).where(NewsSource.name == name))
+        try:
+            return q.fetchone()[0]
+        except TypeError:
+            return None

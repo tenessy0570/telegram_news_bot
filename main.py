@@ -7,6 +7,7 @@ from sqlalchemy import exc
 from db.config import async_session
 from db import actions
 from utils import change_n_value
+import constants
 
 load_dotenv()
 BOT_TOKEN = getenv('BOT_TOKEN')
@@ -23,8 +24,9 @@ async def send_welcome(event: types.Message):
         current_user = await user_actions.get_user_by_name(event.from_user.full_name)
 
         if not current_user:
-            await event.answer('Adding new user to database...')
-            await user_actions.create_user(name=event.from_user.full_name)
+            await user_actions.create_user(name=event.from_user.full_name)  # Add new user to database
+
+    await event.answer(constants.BOT_DESCRIPTION)
 
 
 @dp.message_handler(commands=['update_n'])

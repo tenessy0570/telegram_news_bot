@@ -2,6 +2,9 @@ from db import actions
 
 
 async def change_n_value(session, event, n_value):
+    """
+    Changes user's N value
+    """
     user_actions = actions.UserAction(session)
     if not n_value.isdigit():
         await event.answer('Wrong value type.')  # Do nothing if value has wrong type
