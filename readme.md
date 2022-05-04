@@ -9,6 +9,7 @@
 ## Using docker
 
 ```shell
+mkdir tg_bot
 cd tg_bot
 git clone https://github.com/tenessy0570/telegram_news_bot.git
 cd telegram_news_bot
@@ -24,6 +25,7 @@ docker run -d --rm tg_news
 ```
 ## Without docker
 ```shell
+mkdir tg_bot
 cd tg_bot
 git clone https://github.com/tenessy0570/telegram_news_bot.git
 cd telegram_news_bot
