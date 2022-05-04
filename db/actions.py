@@ -53,8 +53,8 @@ class NewsSourceAction:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
-    async def create_source(self, name: str, link: str):
-        new_source = NewsSource(name=name, link=link)
+    async def create_source(self, name: str):
+        new_source = NewsSource(name=name)
         self.db_session.add(new_source)
         await self.db_session.commit()
 

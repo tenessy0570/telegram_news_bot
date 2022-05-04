@@ -46,3 +46,16 @@ def get_decoded_json(json_body) -> dict:
 def dict_to_string(entry_dict) -> str:
     result = '\n\n'.join(f'{key}:\n{entry_dict[key]}' for key in entry_dict)
     return result
+
+
+async def get_source_by_name(session, source_name):
+    sources_actions = actions.NewsSourceAction(session)
+    source = await sources_actions.get_source_by_name(name=source_name)
+    return source
+
+
+async def set_user_source(event, session, source):
+    current_user = await get_current_user(session, event)
+    user_actions = actions.UserAction(session)
+    await user_actions.update_user(user_id=current_user.id, selected_news_source=source.id)
+    await event.answer(f"News source has been set to {source.name}")
