@@ -38,6 +38,7 @@ async def start(event: types.Message):
 
 @dp.message_handler(commands=['update_n'])
 async def update_n(event: types.Message):
+
     async with async_session() as session:
 
         try:
@@ -76,7 +77,7 @@ async def set_source(event: types.Message):
     source_name = event.get_args().lower()
 
     async with async_session() as session:
-        source = await get_source_by_name(source_name)
+        source = await get_source_by_name(session, source_name)
 
         if not source:
             await event.answer('This source doesn\'t exist.')

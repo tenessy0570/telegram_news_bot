@@ -1,7 +1,6 @@
+import json
 from os import getenv
 import aiohttp
-
-from utils import get_decoded_json
 
 
 class NewsRetriever:
@@ -35,6 +34,7 @@ class NewsApi(NewsRetriever):
         async with aiohttp.ClientSession() as session:
             async with session.get(self._url) as response:
                 response_text = await response.text()
-                decoded_json = get_decoded_json(response_text)
+                decoder = json.decoder.JSONDecoder()
+                decoded_json = decoder.decode(response_text)
                 articles = {article['title']: article['url'] for article in decoded_json['articles']}
                 return articles
