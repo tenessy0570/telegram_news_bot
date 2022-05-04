@@ -31,7 +31,7 @@ git clone https://github.com/tenessy0570/telegram_news_bot.git
 cd telegram_news_bot
 python -m venv venv
 source venv/Scripts/activate
-pip install requirements.txt
+pip install -r requirements.txt
 
 touch .env 
 # Add to .env file your BOT_TOKEN and NEWSAPI_APIKEY
