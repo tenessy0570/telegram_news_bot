@@ -4,3 +4,4 @@ env/
 .idea/
 database.db
 *__pycache__/
+db/database.db
