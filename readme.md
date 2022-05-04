@@ -1,9 +1,10 @@
-1. ###[Installation](#installation)
-    + ####[Using docker](#using-docker)
-    + ####[Without docker](#without-docker)
-2. ###[About bot](#about-bot)
-    + ####[Commands](#commands)
-3. ###[Database schema](#database-schema)
+### 1. [Installation](#installation)
++ [Using docker](#using-docker)
++ [Without docker](#without-docker)
+### 2. [About bot](#about-bot)
++ [Commands](#commands)
+### 3. [Database schema](#database-schema)
+
 # Installation
 ## Using docker
 
