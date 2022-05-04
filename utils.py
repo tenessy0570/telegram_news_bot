@@ -1,6 +1,8 @@
 import json
 
+import constants
 from db import actions
+from news.news_retriever import NewsApi
 
 
 async def get_current_user(session, event):
@@ -59,3 +61,34 @@ async def set_user_source(event, session, source):
     user_actions = actions.UserAction(session)
     await user_actions.update_user(user_id=current_user.id, selected_news_source=source.id)
     await event.answer(f"News source has been set to {source.name}")
+
+
+def get_prettified_sources(sources):
+    return '\n'.join((f'{index + 1}. {source.name}' for index, source in enumerate(sources)))
+
+
+async def get_all_sources(session):
+    sources_actions = actions.NewsSourceAction(session)
+    sources = await sources_actions.get_all_sources()
+    return sources
+
+
+async def get_source_by_id(session, user):
+    sources_actions = actions.NewsSourceAction(session)
+    source = await sources_actions.get_source_by_id(user.selected_news_source)
+    return source
+
+
+async def send_news(user, source, event):
+    news_retriever = NewsApi(user.value_n, source.name)
+    news = await news_retriever.retrieve_news()
+    await event.answer(dict_to_string(news), disable_web_page_preview=True)
+
+
+async def send_start_message(event):
+    await event.answer(constants.BOT_DESCRIPTION)
+
+
+async def add_new_user(session, event):
+    user_actions = actions.UserAction(session)
+    await user_actions.create_user(name=event.from_user.full_name)
