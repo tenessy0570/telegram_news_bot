@@ -72,7 +72,7 @@ async def set_user_source(event, session, source):
 
 
 def get_prettified_sources(sources) -> str:
-    return '\n'.join((f'{index + 1}. {source.name}' for index, source in enumerate(sources)))
+    return '\n'.join((f'{count}. {source.name}' for count, source in enumerate(sources, 1)))
 
 
 async def get_all_sources(session):
