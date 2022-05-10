@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 
 from sqlalchemy import update
 from sqlalchemy.future import select
@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from db.models import *
 
 
-class UserAction:
+class UserManager:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
@@ -49,7 +49,7 @@ class UserAction:
         await self.db_session.commit()
 
 
-class NewsSourceAction:
+class NewsSourceManager:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
@@ -77,7 +77,7 @@ class NewsSourceAction:
             return None
 
 
-class ActionDoings:
+class ActionManager:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 

@@ -1,0 +1,2 @@
+Url = str
+Title = str

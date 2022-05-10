@@ -1,16 +1,15 @@
 import json
 from os import getenv
+from abc import ABC
+from typing import Dict
+
 import aiohttp
 
+from typing_utils.utils import Title, Url
 
-class NewsRetriever:
-    def __init__(self):
-        pass
 
+class NewsRetriever(ABC):
     async def retrieve_news(self):
-        pass
-
-    async def _retrieve_news(self):
         pass
 
 
@@ -21,8 +20,9 @@ class NewsApi(NewsRetriever):
         self._url = \
             f'https://newsapi.org/v2/top-headlines?sources={self._source}&' \
             f'apiKey={getenv("NEWSAPI_APIKEY")}&pageSize={page_size}'
+        # Retrieving newsapi apikey from .env directly in f string is a way to avoid bug.
 
-    async def retrieve_news(self) -> dict:
+    async def retrieve_news(self) -> Dict[Title, Url]:
         """
         Retrieves news headers based on page_size value (amount of headers)
         returns dictionary where key = title of new, value = it's url
@@ -30,7 +30,7 @@ class NewsApi(NewsRetriever):
 
         return await self._retrieve_news()
 
-    async def _retrieve_news(self) -> dict:
+    async def _retrieve_news(self) -> Dict[Title, Url]:
         async with aiohttp.ClientSession() as session:
             async with session.get(self._url) as response:
                 response_text = await response.text()
