@@ -61,7 +61,7 @@ chose. SQLite is being used here as a database.
 # Get list of resources. You can choose on of them to retrieve news from.
 
 /set_resource <name> 
-# Set resource as your preferrable.
+# Set resource as your preferable.
 
 /update_n <number>
 # Set user's N value (1 <= N <= 10).
@@ -70,7 +70,7 @@ chose. SQLite is being used here as a database.
 
 /get_news
 # Get news based on user's N number and preferred resource.
-# Can't be used if user didn't set his preferrable recource.
+# Can't be used if user didn't set his preferable resource.
 ```
 
 ## Database schema
