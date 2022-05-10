@@ -62,6 +62,9 @@ async def get_source_by_name(session, source_name):
 
 
 async def set_user_source(event, session, source):
+    """
+    Sets user's preferable source to retrieve news from
+    """
     current_user = await get_current_user(session, event)
     user_actions = db_managers.UserManager(session)
     await user_actions.update_user(user_id=current_user.id, selected_news_source=source.id)
