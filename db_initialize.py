@@ -1,8 +1,9 @@
 import asyncio
 
-from db import config, db_managers
+from db import config
 from db import models
 from db.config import async_session
+from db.db_managers import SourceManager
 
 
 async def main():
@@ -11,9 +12,11 @@ async def main():
         await conn.run_sync(models.Base.metadata.create_all)
 
         async with async_session() as session:
-            sources_actions = actions.NewsSourceManager(session)
-            await sources_actions.create_source(name='bbc-news')
-            await sources_actions.create_source(name='aftenposten')
-            await sources_actions.create_source(name='bloomberg')
-            await sources_actions.create_source(name='cnn')
-asyncio.run(main())
+            await SourceManager.create_source(session, name='bbc-news')
+            await SourceManager.create_source(session, name='aftenposten')
+            await SourceManager.create_source(session, name='bloomberg')
+            await SourceManager.create_source(session, name='cnn')
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

@@ -4,8 +4,8 @@ from sqlalchemy.orm import declarative_base
 Base = declarative_base()
 
 
-class NewsSource(Base):
-    __tablename__ = 'news_sources'
+class Source(Base):
+    __tablename__ = 'sources'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.CHAR(length=255), nullable=False, unique=True)
@@ -18,7 +18,7 @@ class User(Base):
     name = sqlalchemy.Column(sqlalchemy.CHAR(length=255), nullable=False, unique=True)
     selected_news_source = sqlalchemy.Column(
         sqlalchemy.Integer,
-        sqlalchemy.ForeignKey(NewsSource.id),
+        sqlalchemy.ForeignKey(Source.id),
         nullable=True,
         default=None
     )
@@ -38,7 +38,7 @@ class Action(Base):
     )
     used_news_source = sqlalchemy.Column(
         sqlalchemy.Integer,
-        sqlalchemy.ForeignKey(NewsSource.id),
+        sqlalchemy.ForeignKey(Source.id),
         nullable=True,
         default=None
     )
