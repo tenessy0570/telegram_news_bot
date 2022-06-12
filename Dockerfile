@@ -13,10 +13,10 @@ ENV PYTHONPATH "${PYTHONPATH}:/app"
 
 
 # tg bot token
-ENV BOT_TOKEN=5355135945:AAFRIhXaRIh8EWolg13OEI4nbTgkWWiKKgg
+ENV BOT_TOKEN=
 
 # From https://newsapi.org/
-ENV NEWSAPI_APIKEY=44264e76d9444b84bf120888933db7f0
+ENV NEWSAPI_APIKEY=
 
 RUN python db_initialize.py
 
