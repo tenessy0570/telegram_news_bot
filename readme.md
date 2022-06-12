@@ -74,4 +74,4 @@ chose. SQLite is being used here as a database.
 ```
 
 ## Database schema
-[click](https://github.com/tenessy0570/telegram_news_bot/blob/main/schema.pdf)
+[click](https://github.com/tenessy0570/telegram_news_bot/blob/main/db/schema.pdf)
