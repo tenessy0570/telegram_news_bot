@@ -5,7 +5,8 @@ from typing import Dict
 
 import aiohttp
 
-from typing_utils.utils import Title, Url
+Title = str
+Url = str
 
 
 class NewsRetriever(ABC):
@@ -30,7 +31,7 @@ class NewsApi(NewsRetriever):
 
         return await self._retrieve_news()
 
-    async def _retrieve_news(self) -> Dict[Title, Url]:
+    async def _retrieve_news(self) -> dict[Title, Url]:
         async with aiohttp.ClientSession() as session:
             async with session.get(self._url) as response:
                 response_text = await response.text()
