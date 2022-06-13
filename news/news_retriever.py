@@ -1,7 +1,6 @@
 import json
 from os import getenv
 from abc import ABC
-from typing import Dict
 
 import aiohttp
 
@@ -23,7 +22,7 @@ class NewsApi(NewsRetriever):
             f'apiKey={getenv("NEWSAPI_APIKEY")}&pageSize={page_size}'
         # Retrieving newsapi apikey from .env directly in f string is a way to avoid bug.
 
-    async def retrieve_news(self) -> Dict[Title, Url]:
+    async def retrieve_news(self) -> dict[Title, Url]:
         """
         Retrieves news headers based on page_size value (amount of headers)
         returns dictionary where key = title of new, value = it's url
