@@ -1,6 +1,7 @@
 import json
 
 import constants
+
 from news.news_retriever import NewsApi
 
 

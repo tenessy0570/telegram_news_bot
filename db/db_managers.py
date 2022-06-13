@@ -1,11 +1,7 @@
 from sqlalchemy import update
 from sqlalchemy.future import select
 
-from db.models import (
-    User,
-    Action,
-    Source
-)
+from db.models import Action, Source, User
 
 
 class UserManager:

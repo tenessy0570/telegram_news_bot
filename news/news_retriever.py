@@ -1,6 +1,6 @@
 import json
-from os import getenv
 from abc import ABC
+from os import getenv
 
 import aiohttp
 
@@ -36,5 +36,8 @@ class NewsApi(NewsRetriever):
                 response_text = await response.text()
                 decoder = json.decoder.JSONDecoder()
                 decoded_json = decoder.decode(response_text)
-                articles = {article['title']: article['url'] for article in decoded_json['articles']}
+                articles = {
+                    article['title']: article['url']
+                    for article in decoded_json['articles']
+                }
                 return articles

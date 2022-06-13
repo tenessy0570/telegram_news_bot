@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
-from db.db_managers import (
-    ActionManager,
-    UserManager
-)
+
+from db.db_managers import ActionManager, UserManager
 
 
 class Logger(ABC):

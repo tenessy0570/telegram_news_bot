@@ -1,23 +1,14 @@
-from dotenv import load_dotenv
-from aiogram import Bot, Dispatcher, types, executor
 from os import getenv
+
+from aiogram import Bot, Dispatcher, executor, types
+from dotenv import load_dotenv
+from utils import get_prettified_sources, send_news, send_start_message
 
 from actions_logging.logging import SQLiteLogger
 from db.config import async_session
-from db.utils import (
-    get_current_user,
-    add_new_user,
-    change_n_value,
-    get_user_source,
-    get_all_sources,
-    get_source_by_name,
-    set_user_source
-)
-from utils import (
-    get_prettified_sources,
-    send_news,
-    send_start_message
-)
+from db.utils import (add_new_user, change_n_value, get_all_sources,
+                      get_current_user, get_source_by_name, get_user_source,
+                      set_user_source)
 
 load_dotenv()
 BOT_TOKEN = getenv('BOT_TOKEN')
@@ -114,7 +105,8 @@ async def set_source(event: types.Message):
         source = await get_source_by_name(session, source_name)
 
         if not source:
-            await event.answer('Type name of source after /set_source command to set your preferrable news source')
+            await event.answer('Type name of source after /set_source command '
+                               'to set your preferrable news source')
             return None
 
         await set_user_source(event, session, source)

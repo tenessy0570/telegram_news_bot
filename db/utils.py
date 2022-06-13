@@ -1,8 +1,5 @@
 from actions_logging.logging import SQLiteLogger
-from db.db_managers import (
-    UserManager,
-    SourceManager
-)
+from db.db_managers import SourceManager, UserManager
 
 
 async def get_current_user(session, event):
@@ -20,7 +17,8 @@ async def change_n_value(session, event, n_value):
     n_value = int(n_value)
 
     if not 1 <= n_value <= 10:
-        await event.answer("N value should be 1 <= N <= 10")  # Do nothing if value is too high or too low
+        # Do nothing if value is too high or too low
+        await event.answer("N value should be 1 <= N <= 10")
         return None
 
     current_user = await get_current_user(session, event)

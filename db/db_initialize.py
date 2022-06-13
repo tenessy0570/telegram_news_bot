@@ -1,7 +1,6 @@
 import asyncio
 
-from db import config
-from db import models
+from db import config, models
 from db.config import async_session
 from db.db_managers import SourceManager
 
